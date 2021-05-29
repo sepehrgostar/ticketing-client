@@ -1,7 +1,7 @@
 {
     "name": "sepehrgostar/laravel-client",
     "description": "sepehrgostar client side for api",
-    "license": "license",
+    "license": "GPL-2.0-only",
     "authors": [
         {
             "name": "sepehrgostar",
