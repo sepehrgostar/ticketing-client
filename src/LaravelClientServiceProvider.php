@@ -1,10 +1,10 @@
 <?php
 
-namespace Sepehrgostar\Api;
+namespace Sepehrgostar\LaravelClient;
 
 use Illuminate\Support\ServiceProvider;
 
-class ApiServiceProvider extends ServiceProvider
+class LaravelClientServiceProvider extends ServiceProvider
 {
     /**
      * Perform post-registration booting of services.
@@ -14,8 +14,8 @@ class ApiServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //$this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'sepehrgostar');
-         $this->loadViewsFrom(__DIR__.'/resources/views', 'sepehrgostar');
-         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'LaravelClient');
+        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
@@ -30,11 +30,11 @@ class ApiServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/config/api.php', 'api');
+        $this->mergeConfigFrom(__DIR__ . '/config/LaravelClient.php', 'LaravelClient');
 
         // Register the service the package provides.
-        $this->app->singleton('api', function ($app) {
-            return new Api;
+        $this->app->singleton('LaravelClient', function ($app) {
+            return new LaravelClient;
         });
     }
 
@@ -45,7 +45,7 @@ class ApiServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['api'];
+        return ['LaravelClient'];
     }
 
     /**
@@ -57,23 +57,23 @@ class ApiServiceProvider extends ServiceProvider
     {
         // Publishing the configuration file.
         $this->publishes([
-            __DIR__.'/config/api.php' => config_path('api.php'),
-        ], 'api.config');
+            __DIR__ . '/config/LaravelClient.php' => config_path('LaravelClient.php'),
+        ], 'LaravelClient.config');
 
         // Publishing the views.
         /*$this->publishes([
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/sepehrgostar'),
-        ], 'api.views');*/
+        ], 'LaravelClient.views');*/
 
         // Publishing assets.
         $this->publishes([
-            __DIR__.'/resources/assets' => public_path('vendor/sepehrgostar'),
-        ], 'sepehrgostar.api.views');
+            __DIR__ . '/resources/assets' => public_path('vendor/sepehrgostar'),
+        ], 'sepehrgostar.LaravelClient.views');
 
         // Publishing the translation files.
         /*$this->publishes([
             __DIR__.'/../resources/lang' => resource_path('lang/vendor/sepehrgostar'),
-        ], 'api.views');*/
+        ], 'LaravelClient.views');*/
 
         // Registering package commands.
         // $this->commands([]);

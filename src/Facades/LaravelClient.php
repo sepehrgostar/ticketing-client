@@ -1,10 +1,10 @@
 <?php
 
-namespace Sepehrgostar\Api\Facades;
+namespace Sepehrgostar\LaravelClient\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Api extends Facade
+class LaravelClient extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -13,6 +13,6 @@ class Api extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return 'api';
+        return 'LaravelClient';
     }
 }

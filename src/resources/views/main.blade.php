@@ -1,4 +1,4 @@
-@extends('base::layouts.admin' )
+@extends('layouts.app' )
 @section('content')
 
    <h1>accounts</h1>
