@@ -4,7 +4,7 @@
     "license": "GPL-2.0-only",
     "authors": [
         {
-            "name": "sepehrgostar",
+            "name": "SepehrGostar",
             "email": "info@sepehrgostar.com",
             "homepage": "https://www.sepehrgostar.com"
         }
@@ -22,7 +22,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Sepehrgostar\\LaravelClient\\laravelClientServiceProvider"
+                "Sepehrgostar\\LaravelClient\\LaravelClientServiceProvider"
             ],
             "aliases": {
                 "Api": "Sepehrgostar\\LaravelClient\\Facades\\LaravelClient"

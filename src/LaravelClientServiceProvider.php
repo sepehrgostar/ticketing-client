@@ -6,11 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 class LaravelClientServiceProvider extends ServiceProvider
 {
-    /**
-     * Perform post-registration booting of services.
-     *
-     * @return void
-     */
+
     public function boot(): void
     {
         //$this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'sepehrgostar');
@@ -61,9 +57,9 @@ class LaravelClientServiceProvider extends ServiceProvider
         ], 'LaravelClient.config');
 
         // Publishing the views.
-        /*$this->publishes([
+        $this->publishes([
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/sepehrgostar'),
-        ], 'LaravelClient.views');*/
+        ], 'LaravelClient.views');
 
         // Publishing assets.
         $this->publishes([
