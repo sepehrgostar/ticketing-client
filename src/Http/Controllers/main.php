@@ -9,7 +9,7 @@ class main extends Controller
 
     public function index()
     {
-        return view('gandom::account');
+        return view('sepehrgostar::index');
     }
 
     public function query()
