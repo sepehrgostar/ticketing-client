@@ -3,7 +3,6 @@
 namespace Sepehrgostar\LaravelClient\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use function Couchbase\defaultDecoder;
 
 class main extends Controller
 {
@@ -15,6 +14,6 @@ class main extends Controller
 
     public function query()
     {
-defaultDecoder(ff);
+
     }
 }
