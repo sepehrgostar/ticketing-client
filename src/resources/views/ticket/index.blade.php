@@ -1,4 +1,4 @@
-@extends('layouts.app' )
+@extends('layouts.app')
 @section('content')
 
     <link rel="stylesheet" href="{{asset('vendor/sepehrgostar/bootstrap.min.css')}}">

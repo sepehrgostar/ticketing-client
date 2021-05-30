@@ -1,6 +1,6 @@
 {
-    "name": "sepehrgostar/laravel-client",
-    "description": "sepehrgostar client side for api",
+    "name": "sepehrgostar/ticketing",
+    "description": "Sepehrgostar Client Side for Ticketing",
     "license": "GPL-2.0-only",
     "authors": [
         {
@@ -9,8 +9,8 @@
             "homepage": "https://www.sepehrgostar.com"
         }
     ],
-    "homepage": "https://github.com/sepehrgostar/laravel-client",
-    "keywords": ["Laravel", "Api"],
+    "homepage": "https://github.com/sepehrgostar/ticketing",
+    "keywords": ["Laravel", "Api","Ticketing"],
     "require": {
         "illuminate/support": "~7|~8"
     },
@@ -22,10 +22,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Sepehrgostar\\LaravelClient\\LaravelClientServiceProvider"
+                "Sepehrgostar\\Ticketing\\ticketingClientServiceProvider"
             ],
             "aliases": {
-                "Api": "Sepehrgostar\\LaravelClient\\Facades\\LaravelClient"
+                "Api": "Sepehrgostar\\Ticketing\\Facades\\Ticketing"
             }
         }
     }
