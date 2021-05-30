@@ -59,9 +59,11 @@ class LaravelClientServiceProvider extends ServiceProvider
             __DIR__ . '/config/LaravelClient.php' => config_path('LaravelClient.php'),
         ], 'sepehrgostar.LaravelClient.config');
 
+
+        //php artisan vendor:publish --tag=sepehrgostar.LaravelClient.views
         // Publishing the views.
         $this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/sepehrgostar'),
+            __DIR__.'/resources/views' => base_path('resources/views/vendor/sepehrgostar'),
         ], 'sepehrgostar.LaravelClient.views');
 
         // Publishing assets.
