@@ -2,7 +2,6 @@
 
 Route::group(['middleware' => ['web', 'auth'], 'as' => 'sepehrgostar.LaravelClient.', 'prefix' => 'sepehrgostar/laravelClient', 'namespace' => 'Sepehrgostar\LaravelClient\Http\Controllers'], function () {
 
-    Route::get('test/', 'main@index')->name('main.index');
 
     Route::group(['as' => 'ticket.', 'prefix' => 'ticket'], function () {
 

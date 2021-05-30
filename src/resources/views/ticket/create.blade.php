@@ -1,8 +1,11 @@
 @extends('layouts.app' )
 @section('content')
-    <link rel="stylesheet" href="{{asset('vendor/sepehrgostar/bootstrap.min.css')}}">
-    <script src="{{asset('vendor/sepehrgostar/alpine.js')}}" defer></script>
 
+    <link rel="stylesheet" href="{{asset('vendor/sepehrgostar/bootstrap.min.css')}}">
+    <link href="{{asset('vendor/sepehrgostar/dropzone.min.css')}}" rel="stylesheet">
+
+    <script src="{{asset('vendor/sepehrgostar/alpine.js')}}" defer></script>
+    <script src="{{asset('vendor/sepehrgostar/dropzone.min.js')}}"></script>
     <script src="{{asset('vendor/sepehrgostar/jquery.min.js')}}"></script>
 
     <div class="container my-3">
