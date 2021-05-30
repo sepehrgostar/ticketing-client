@@ -1,7 +1,7 @@
 <?php
 
-namespace Sepehrgostar\Ticketing;
-
+namespace Sepehrgostar\TicketingClient;
+ 
 use Illuminate\Support\ServiceProvider;
 
 class TicketingClientServiceProvider extends ServiceProvider
