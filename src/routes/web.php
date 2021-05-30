@@ -2,7 +2,6 @@
 
 Route::group(['middleware' => ['web', 'auth'], 'as' => 'Sepehrgostar.TicketingClient.', 'prefix' => 'ticketing', 'namespace' => 'Sepehrgostar\TicketingClient\Http\Controllers'], function () {
 
-    Route::get('test/', 'main@index')->name('main.index');
 
     Route::group(['as' => 'ticket.', 'prefix' => 'ticket'], function () {
 
