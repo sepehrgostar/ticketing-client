@@ -11,7 +11,7 @@
             <div class="card-body">
 
                 <form enctype="multipart/form-data" method='post'
-                      action="{{ route('Sepehrgostar.TicketClient.ticket.store') }}"
+                      action="{{ route('Sepehrgostar.TicketingClient.store') }}"
                 >
                     @csrf
 
@@ -92,7 +92,7 @@
                             <b> {{$signature->end_note ?? ''}}</b>
                         </p>
 
-                        @component('LaravelClient::partials.uploader', [
+                        @component('TicketingClient::partials.uploader', [
                         'title' => 'حداکثر فایل قابل آپلود ۱۰ مورد',
                          'params' => [
                          'user'=> json_encode(auth()->user()),

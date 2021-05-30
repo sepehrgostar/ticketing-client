@@ -63,7 +63,7 @@
                                     <span class="filename ellipsis"></span>
                                     <span class="  tahoma text-muted text-left float-left ">{{round(($attach->size / 1024) / 1024,2) }}MB</span>
                                     <a class="tahoma text-secondary  mr-2" target="_blank"
-                                       href="{{route('Sepehrgostar.TicketClient.ticket.download.attach',['uuid'=>$attach->uuid,'filename'=>$attach->filename,'mime'=>$attach->mime])}}"> {{$attach->filename}} </a>
+                                       href="{{route('Sepehrgostar.TicketingClient.download.attach',['uuid'=>$attach->uuid,'filename'=>$attach->filename,'mime'=>$attach->mime])}}"> {{$attach->filename}} </a>
                                 </li>
                             @endforeach
 
@@ -80,7 +80,7 @@
                                     <span class="filename ellipsis"></span>
                                     <span class="  tahoma text-muted text-left float-left ">{{round(($attach->size / 1024) / 1024,2) }}MB</span>
                                     <a class="tahoma text-secondary  mr-2" target="_blank"
-                                       href="{{route('Sepehrgostar.ticketingClient.ticket.download.attach',['uuid'=>$attach->uuid])}}"> {{$attach->filename}} </a>
+                                       href="{{route('Sepehrgostar.TicketingClient.download.attach',['uuid'=>$attach->uuid])}}"> {{$attach->filename}} </a>
                                 </li>
                             @endforeach
 

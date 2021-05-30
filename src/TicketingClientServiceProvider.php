@@ -1,7 +1,7 @@
 <?php
 
 namespace Sepehrgostar\TicketingClient;
- 
+
 use Illuminate\Support\ServiceProvider;
 
 class TicketingClientServiceProvider extends ServiceProvider
@@ -51,27 +51,24 @@ class TicketingClientServiceProvider extends ServiceProvider
     protected function bootForConsole(): void
     {
 
-        //php artisan vendor:publish --tag=sepehrgostar.ticketingClient.views
+        //php artisan vendor:publish --tag=sepehrgostar.ticketingClient --force
 
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
         // Publishing the configuration file.
         $this->publishes([
             __DIR__ . '/config/TicketingClient.php' => config_path('TicketingClient.php'),
-        ], 'sepehrgostar.ticketingClient.config');
-
+        ], 'sepehrgostar.ticketingClient');
 
         // Publishing the views.
         $this->publishes([
             __DIR__ . '/resources/views' => resource_path('views/vendor/TicketingClient')
-        ], 'sepehrgostar.ticketingClient.views');
-
+        ], 'sepehrgostar.ticketingClient');
 
         // Publishing assets.
         $this->publishes([
             __DIR__ . '/resources/assets' => public_path('vendor/sepehrgostar/ticketingClient'),
-        ], 'sepehrgostar.ticketingClient.views');
-
+        ], 'sepehrgostar.ticketingClient');
 
     }
 }

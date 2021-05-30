@@ -9,7 +9,7 @@
             <div class="card-header">تیکتها</div>
             <div class="card-body">
 
-                <p><a href="{{ route('sepehrgostar.LaravelClient.ticket.create',['uid_tmp'=> Str::random(8)]) }}"
+                <p><a href="{{ route('Sepehrgostar.TicketingClient.create',['uid_tmp'=> Str::random(8)]) }}"
                       class="btn btn-success text-light">ایجاد تیکت</a>
                 </p>
 
@@ -54,7 +54,7 @@
                                     <td>
                                         <div class='btn-group float-left'>
                                             <a class='btn btn-primary btn-sm text-white'
-                                               href='{{route('sepehrgostar.LaravelClient.ticket.show',['ticket_id'=>$row->id,'uid_tmp'=> Str::random(8)])}}'>مشاهده
+                                               href='{{route('Sepehrgostar.TicketingClient.show',['ticket_id'=>$row->id,'uid_tmp'=> Str::random(8)])}}'>مشاهده
                                                 تیکت</a>
 
                                         </div>

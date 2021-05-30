@@ -9,7 +9,16 @@ Via Composer
 $ composer require sepehrgostar/ticketing-client
 ```
 
- 
+publish view and assets
+```
+php artisan vendor:publish --tag=sepehrgostar.ticketingClient.views
+```
+
+migrate 
+```
+php artisan vendor:publish --tag=sepehrgostar.ticketingClient.views
+```
+
 ## Security
 
 If you discover any security related issues, please email author email instead of using the issue tracker.

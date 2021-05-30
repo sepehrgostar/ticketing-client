@@ -18,7 +18,7 @@
         @endif
 
     <form id="reply" role="form" method="POST"
-          action="{{route('sepehrgostar.LaravelClient.ticket.reply',$data->ticket->id)}}"
+          action="{{route('Sepehrgostar.TicketingClient.reply',$data->ticket->id)}}"
     >
         @csrf
 
@@ -60,7 +60,7 @@
 
                 @if(!empty($data->childs))
 
-                    @include('LaravelClient::ticket.child')
+                    @include('TicketingClient::ticket.child')
                 @endif
 
                 <input type="hidden" name="uid_tmp" value="{{request()->uid_tmp}}">
@@ -92,14 +92,14 @@
                         </p>
                         <?php
                         request()->request->add(['attachable_type' => 'webine\ticketing\entities\ticketChildModel']);
-                        $uploadedFiles = app(\Sepehrgostar\LaravelClient\Http\Controllers\ticketController::class)->uploadedFiles(request());
+                        $uploadedFiles = app(\Sepehrgostar\TicketingClient\Http\Controllers\ticketController::class)->uploadedFiles(request());
                         ?>
-                        @component('LaravelClient::partials.uploader', [
+                        @component('TicketingClient::partials.uploader', [
                        'title' => trans('ticketing::admin.max_attach_files'),
                        'params' => [
                            'user'=> json_encode(auth()->user()),
                            'api_token'=> auth()->user()->sepehrgostar_api_token,
-                           'api_key' => config('LaravelClient.api_key'),
+                           'api_key' => config('TicketingClient.api_key'),
                            'uid_tmp' => request()->uid_tmp,
                            'attachable_type' => 'webine\ticketing\entities\ticketChildModel',
                            'directory' => 'ticketing/'.date('Ym'),
@@ -136,7 +136,7 @@
                     </button>
 
                     <a class='btn btn-secondary'
-                       href='{{route('sepehrgostar.LaravelClient.ticket.index')}}'>
+                       href='{{route('Sepehrgostar.TicketingClient.index')}}'>
                         بازگشت
                     </a>
 
@@ -146,7 +146,7 @@
         </div>
 
     </form>
-    @include('LaravelClient::ticket.send_sensitive_data')
+    @include('TicketingClient::ticket.send_sensitive_data')
 
 </div>
 

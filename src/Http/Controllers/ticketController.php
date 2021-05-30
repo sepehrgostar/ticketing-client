@@ -14,12 +14,13 @@ class ticketController extends Controller
 
     public function index()
     {
+
         //register user in yourDomain.sepehrgostar.com
         $this->checkUser();
 
-        $base_url = config('LaravelClient.base_url');
+        $base_url = config('TicketingClient.base_url');
         $response = Http::get($base_url . '/api/v1/index', [
-            'api_key' => config('LaravelClient.api_key'),
+            'api_key' => config('TicketingClient.api_key'),
             'user' => json_encode(auth()->user()),
             'api_token' => auth()->user()->sepehrgostar_api_token
         ]);
@@ -36,10 +37,10 @@ class ticketController extends Controller
         //register user in yourDomain.sepehrgostar.com
         $this->checkUser();
 
-        $base_url = config('LaravelClient.base_url');
+        $base_url = config('TicketingClient.base_url');
 
         $response = Http::get($base_url . '/api/v1/create', [
-            'api_key' => config('LaravelClient.api_key'),
+            'api_key' => config('TicketingClient.api_key'),
             'user' => json_encode(auth()->user()),
             'api_token' => auth()->user()->sepehrgostar_api_token
 
@@ -68,9 +69,9 @@ class ticketController extends Controller
         ]);
 
         $this->checkUser();
-        $base_url = config('LaravelClient.base_url');
+        $base_url = config('TicketingClient.base_url');
         $response = Http::get($base_url . '/api/v1/store', [
-            'api_key' => config('LaravelClient.api_key'),
+            'api_key' => config('TicketingClient.api_key'),
             'api_token' => auth()->user()->sepehrgostar_api_token,
             "uid_tmp" => $request->uid_tmp,
             "title" => $request->title,
@@ -94,9 +95,9 @@ class ticketController extends Controller
     {
         $this->checkUser();
 
-        $base_url = config('LaravelClient.base_url');
+        $base_url = config('TicketingClient.base_url');
         $response = Http::get($base_url . '/api/v1/show/' . $id, [
-            'api_key' => config('LaravelClient.api_key'),
+            'api_key' => config('TicketingClient.api_key'),
             'user' => json_encode(auth()->user()),
             'api_token' => auth()->user()->sepehrgostar_api_token,
             'id' => $id,
@@ -121,9 +122,9 @@ class ticketController extends Controller
 
         $this->checkUser();
 
-        $base_url = config('LaravelClient.base_url');
+        $base_url = config('TicketingClient.base_url');
         $response = Http::get($base_url . '/api/v1/reply/' . $id, [
-            'api_key' => config('LaravelClient.api_key'),
+            'api_key' => config('TicketingClient.api_key'),
             'api_token' => auth()->user()->sepehrgostar_api_token,
             "uid_tmp" => $request->uid_tmp,
             'id' => $id,
@@ -143,9 +144,9 @@ class ticketController extends Controller
     {
         $this->checkUser();
 
-        $base_url = config('LaravelClient.base_url');
+        $base_url = config('TicketingClient.base_url');
         $response = Http::get($base_url . '/api/v1/store/sensitive', [
-            'api_key' => config('LaravelClient.api_key'),
+            'api_key' => config('TicketingClient.api_key'),
             'ticket_id' => $request->ticket_id,
             'content' => $request->content,
             'api_token' => auth()->user()->sepehrgostar_api_token,
@@ -166,9 +167,9 @@ class ticketController extends Controller
     {
         $this->checkUser();
 
-        $base_url = config('LaravelClient.base_url');
+        $base_url = config('TicketingClient.base_url');
         $response = Http::get($base_url . '/api/v1/download/attach/' . $request->uuid, [
-            'api_key' => config('LaravelClient.api_key'),
+            'api_key' => config('TicketingClient.api_key'),
             'api_token' => auth()->user()->sepehrgostar_api_token,
             'user' => json_encode(auth()->user()),
         ]);
@@ -182,9 +183,9 @@ class ticketController extends Controller
     public function uploadedFiles(Request $request)
     {
         $this->checkUser();
-        $base_url = config('LaravelClient.base_url');
+        $base_url = config('TicketingClient.base_url');
         $response = Http::get($base_url . '/api/v1/uploaded/file', [
-            'api_key' => config('LaravelClient.api_key'),
+            'api_key' => config('TicketingClient.api_key'),
             'api_token' => auth()->user()->sepehrgostar_api_token,
             'user' => json_encode(auth()->user()),
             'attachable_type' => $request->attachable_type,
@@ -196,9 +197,9 @@ class ticketController extends Controller
 
     public function deleteAttach($id)
     {
-        $base_url = config('LaravelClient.base_url');
+        $base_url = config('TicketingClient.base_url');
         Http::delete($base_url . '/api/v1/attachments/delete/' . $id, [
-            'api_key' => config('LaravelClient.api_key'),
+            'api_key' => config('TicketingClient.api_key'),
             'api_token' => auth()->user()->attachable_type,
             'user' => json_encode(auth()->user()),
         ]);
@@ -206,11 +207,12 @@ class ticketController extends Controller
 
     public function checkUser()
     {
-        if (auth()->user()->sepehrgostar_api_token == null) {
-            $base_url = config('LaravelClient.base_url');
 
+
+        if (auth()->user()->sepehrgostar_api_token == null) {
+            $base_url = config('TicketingClient.base_url');
             $response = Http::get($base_url . '/api/v1/register/user', [
-                'api_key' => config('LaravelClient.api_key'),
+                'api_key' => config('TicketingClient.api_key'),
                 'user' => json_encode(auth()->user()),
             ]);
 
