@@ -4,10 +4,8 @@
             <div class="p-1">
                 <small class="badge @if(@$row->user->is_admin) badge-primary @else badge-secondary  @endif ">
 
-
-                    <span class="tahoma"> {{auth()->user()['username'] ?? '---'}}</span>
                     @if(auth()->user()->id !=$row->user->id)
-                        <span class="tahoma"> operator </span>
+                        <span class="tahoma"> اپراتور </span>
                     @else
                         <span class="tahoma"> {{auth()->user()['username'] ?? '---'}}</span>
                     @endif
@@ -65,7 +63,7 @@
                                     <span class="filename ellipsis"></span>
                                     <span class="  tahoma text-muted text-left float-left ">{{round(($attach->size / 1024) / 1024,2) }}MB</span>
                                     <a class="tahoma text-secondary  mr-2" target="_blank"
-                                       href="{{route('sepehrgostar.LaravelClient.ticket.download.attach',['uuid'=>$attach->uuid,'filename'=>$attach->filename,'mime'=>$attach->mime])}}"> {{$attach->filename}} </a>
+                                       href="{{route('Sepehrgostar.TicketClient.ticket.download.attach',['uuid'=>$attach->uuid,'filename'=>$attach->filename,'mime'=>$attach->mime])}}"> {{$attach->filename}} </a>
                                 </li>
                             @endforeach
 
@@ -82,7 +80,7 @@
                                     <span class="filename ellipsis"></span>
                                     <span class="  tahoma text-muted text-left float-left ">{{round(($attach->size / 1024) / 1024,2) }}MB</span>
                                     <a class="tahoma text-secondary  mr-2" target="_blank"
-                                       href="{{route('sepehrgostar.LaravelClient.ticket.download.attach',['uuid'=>$attach->uuid])}}"> {{$attach->filename}} </a>
+                                       href="{{route('Sepehrgostar.ticketingClient.ticket.download.attach',['uuid'=>$attach->uuid])}}"> {{$attach->filename}} </a>
                                 </li>
                             @endforeach
 
@@ -92,16 +90,16 @@
                             @forelse($row->attachments_limit  as $attach_limit)
                                 <table class="table table-hover col-6">
                                     <tr>
-                                        <td>  {{trans('ticketing::admin.link_file')}} </td>
+                                        <td>  لینک فایل </td>
                                         <td><i class="fa fa-download" aria-hidden="true"></i>
                                             <span class="filename ellipsis"></span>
                                             <a class="tahoma text-primary  mr-2" target="_blank"
-                                               href="{{route('ticketing.download.attach.autoresponse',['uid'=>$attach_limit->uid])}}"> {{$attach_limit->attachment->filename}} </a>
+                                               href="{{route('Sepehrgostar.TicketingClient.download.attach.autoresponse',['uid'=>$attach_limit->uid])}}"> {{$attach_limit->attachment->filename}} </a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            {{trans('ticketing::admin.size_file')}}
+                                            سایز فایل
                                         </td>
                                         <td>
                                             <span class="filename ellipsis"></span>
@@ -111,7 +109,7 @@
 
                                     <tr>
                                         <td>
-                                            {{trans('ticketing::admin.number_download_allow')}}
+                                           تعداد مجاز دانلود
                                         </td>
                                         <td>
                                             {{($attach_limit->max_download-$attach_limit->count_download)}}
@@ -119,7 +117,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            {{trans('ticketing::admin.linkـexpiration')}}
+                                            تاریخ انقضا
                                         </td>
                                         <td>
                                             {{jdate($attach_limit->expire_at)}}

@@ -17,7 +17,7 @@
         <h5>{{ $title  ?? ''}}</h5>
         <br>
         <p>Drag & Drop</p>
-        <small> حداکثر سایر مجاز {{ config('attachment.max_size', 2000) / 1000 }} MB</small>
+        <small> حداکثر سایر مجاز {{ 5000 / 1000 }} MB</small>
     </div>
 </div>
 <!-- Dropzone {{ $dropzoneId }} -->
@@ -31,13 +31,13 @@
     $(function () {
         // Attach dropzone on element
         $("#{{ $dropzoneId }}").dropzone({
-            url: "{{config('LaravelClient.base_url')}}/api/v1/attachments/store",
+            url: "{{config('TicketingClient.base_url')}}/api/v1/attachments/store",
             method: "post",
             addRemoveLinks: true,
             maxFiles: {{@$maxFile ? $maxFile : 5}},
             dictRemoveFile: "حذف فایل",
             maxFilesize: {{ config('attachment.max_size', 20000) / 1000 }},
-            acceptedFiles: "{!! isset($acceptedFiles) ? $acceptedFiles : config('attachment.allowed') !!}",
+            acceptedFiles: "{!! isset($acceptedFiles)  !!}",
             headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}"},
 
             params: {!! isset($params) ? json_encode($params) : '{}'  !!},
@@ -98,7 +98,7 @@
 
                     // Download link
                     var anchorEl = document.createElement('a');
-                    anchorEl.setAttribute('href', '{{config('LaravelClient.base_url')}}/api/v1/download/attach/' + uploadedFile.uuid);
+                    anchorEl.setAttribute('href', '{{config('TicketingClient.base_url')}}/api/v1/download/attach/' + uploadedFile.uuid);
                     anchorEl.setAttribute('target', '_blank');
                     anchorEl.className = 'dz-remove';
                     anchorEl.innerHTML = "دانلود فایل";
@@ -153,11 +153,11 @@
                         uploadedFiles.splice(index, 1);
 
                         $.ajax({
-                            url: "/sepehrgostar/laravelClient/ticket/delete/file/" + found.id,
+                            url: "/ticketing/delete/file/" + found.id,
                             type: 'DELETE',
                             headers: {
-                                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                                },
+                                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                            },
                             success: function (response) {
                                 console.log('deleted');
                             },
@@ -198,7 +198,7 @@
             ext = 'picture'
         }
 
-        return "/vendor/sepehrgostar/images/icon/" + ext + ".svg";
+        return "/vendor/sepehrgostar/ticketingClient/images/icon/" + ext + ".svg";
 
     }
 </script>

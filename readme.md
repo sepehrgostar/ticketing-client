@@ -6,7 +6,7 @@
 Via Composer
 
 ``` bash
-$ composer require sepehrgostar/ticketing
+$ composer require sepehrgostar/ticketing-client
 ```
 
  

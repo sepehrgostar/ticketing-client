@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['middleware' => ['web', 'auth'], 'as' => 'sepehrgostar.ticketing.', 'prefix' => 'ticketing', 'namespace' => 'Sepehrgostar\LaravelClient\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth'], 'as' => 'Sepehrgostar.TicketingClient.', 'prefix' => 'ticketing', 'namespace' => 'Sepehrgostar\TicketingClient\Http\Controllers'], function () {
 
     Route::get('test/', 'main@index')->name('main.index');
 

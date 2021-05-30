@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
-    <link rel="stylesheet" href="{{asset('vendor/sepehrgostar/bootstrap.min.css')}}">
-    <script src="{{asset('vendor/sepehrgostar/alpine.js')}}" defer></script>
+    <link rel="stylesheet" href="{{asset('vendor/sepehrgostar/ticketingClient/bootstrap.min.css')}}">
+    <script src="{{asset('vendor/sepehrgostar/ticketingClient/alpine.js')}}" defer></script>
 
-    <script src="{{asset('vendor/sepehrgostar/jquery.min.js')}}"></script>
+    <script src="{{asset('vendor/sepehrgostar/ticketingClient/jquery.min.js')}}"></script>
 
     <div class="container my-3">
         <div class="card shadow">
@@ -11,7 +11,7 @@
             <div class="card-body">
 
                 <form enctype="multipart/form-data" method='post'
-                      action="{{ route('sepehrgostar.LaravelClient.ticket.store') }}"
+                      action="{{ route('Sepehrgostar.TicketClient.ticket.store') }}"
                 >
                     @csrf
 
@@ -93,11 +93,11 @@
                         </p>
 
                         @component('LaravelClient::partials.uploader', [
-                        'title' => trans('ticketing::admin.max_attach_files'),
+                        'title' => 'حداکثر فایل قابل آپلود ۱۰ مورد',
                          'params' => [
                          'user'=> json_encode(auth()->user()),
                          'api_token'=> auth()->user()->sepehrgostar_api_token,
-                         'api_key' => config('LaravelClient.api_key'),
+                         'api_key' => config('TicketingClient.api_key'),
                          'uid_tmp' => request()->uid_tmp,
                          'attachable_type' => 'webine\ticketing\entities\ticketChildModel',
                          'directory' => 'ticketing/'.date('Ym'),

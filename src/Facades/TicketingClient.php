@@ -1,10 +1,10 @@
 <?php
 
-namespace Sepehrgostar\Ticketing\Facades;
+namespace Sepehrgostar\TicketingClient\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Ticketing extends Facade
+class TicketingClient extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -13,6 +13,6 @@ class Ticketing extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return 'Ticketing';
+        return 'TicketingClient';
     }
 }
