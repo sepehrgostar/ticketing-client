@@ -3,6 +3,8 @@
     <link rel="stylesheet" href="{{asset('vendor/sepehrgostar/ticketingClient/bootstrap.min.css')}}">
     <script src="{{asset('vendor/sepehrgostar/ticketingClient/alpine.js')}}" defer></script>
 
+    <link href="{{asset('vendor/sepehrgostar/dropzone.min.css')}}" rel="stylesheet">
+    <script src="{{asset('vendor/sepehrgostar/dropzone.min.js')}}"></script>
     <script src="{{asset('vendor/sepehrgostar/ticketingClient/jquery.min.js')}}"></script>
 
     <div class="container my-3">
