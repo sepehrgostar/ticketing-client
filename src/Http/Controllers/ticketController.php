@@ -1,6 +1,6 @@
 <?php
 
-namespace Sepehrgostar\LaravelClient\Http\Controllers;
+namespace Sepehrgostar\Ticketing\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -28,7 +28,7 @@ class ticketController extends Controller
         if (isset($data->status) and ($data->status == "no_connect")) {
             return redirect()->route('home')->with('error', $data->message);
         }
-        return view('LaravelClient::ticket.index', compact('data'));
+        return view('Ticketing::ticket.index', compact('data'));
     }
 
     public function create()
@@ -50,7 +50,7 @@ class ticketController extends Controller
         if (isset($data->status) and ($data->status == "no_connect")) {
             return redirect()->route('home')->with('error', $data->message);
         }
-        return view('LaravelClient::ticket.create', ['priorities' => $data->priorities, 'teams' => $data->teams, 'contracts' => json_encode($data->contracts)]);
+        return view('Ticketing::ticket.create', ['priorities' => $data->priorities, 'teams' => $data->teams, 'contracts' => json_encode($data->contracts)]);
     }
 
     public function store(Request $request)
@@ -87,7 +87,7 @@ class ticketController extends Controller
         }
 
 
-        return redirect()->route('sepehrgostar.LaravelClient.ticket.show', ['ticket_id' => $data, 'uid_tmp' => Str::random(8)]);
+        return redirect()->route('sepehrgostar.ticketing.ticket.show', ['ticket_id' => $data, 'uid_tmp' => Str::random(8)]);
     }
 
     public function show(Request $request, $id)
@@ -107,7 +107,7 @@ class ticketController extends Controller
         if (isset($data->status) and ($data->status == "no_connect")) {
             return redirect()->route('home')->with('error', $data->message);
         }
-        return view('LaravelClient::ticket.show', ['data' => $data]);
+        return view('Ticketing::ticket.show', ['data' => $data]);
     }
 
     public function reply(Request $request, $id)

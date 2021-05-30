@@ -1,10 +1,10 @@
 <?php
 
-namespace Sepehrgostar\LaravelClient\Facades;
+namespace Sepehrgostar\Ticketing\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class LaravelClient extends Facade
+class Ticketing extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -13,6 +13,6 @@ class LaravelClient extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return 'LaravelClient';
+        return 'Ticketing';
     }
 }
