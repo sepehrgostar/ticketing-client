@@ -57,7 +57,7 @@ class LaravelClientServiceProvider extends ServiceProvider
         // Publishing the configuration file.
         $this->publishes([
             __DIR__ . '/config/LaravelClient.php' => config_path('LaravelClient.php'),
-        ], 'LaravelClient.config');
+        ], 'sepehrgostar.LaravelClient.config');
 
         // Publishing the views.
         $this->publishes([
@@ -69,10 +69,14 @@ class LaravelClientServiceProvider extends ServiceProvider
             __DIR__ . '/resources/assets' => public_path('vendor/sepehrgostar'),
         ], 'sepehrgostar.LaravelClient.views');
 
+        $this->publishes([
+            __DIR__ . '/resources/images' => public_path('images/icons'),
+        ], 'sepehrgostar.LaravelClient.views');
+
         // Publishing the translation files.
         /*$this->publishes([
             __DIR__.'/../resources/lang' => resource_path('lang/vendor/sepehrgostar'),
-        ], 'LaravelClient.views');*/
+        ], 'sepehrgostar.LaravelClient.views');*/
 
         // Registering package commands.
         // $this->commands([]);
