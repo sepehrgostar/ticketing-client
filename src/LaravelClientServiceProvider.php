@@ -51,6 +51,9 @@ class LaravelClientServiceProvider extends ServiceProvider
      */
     protected function bootForConsole(): void
     {
+
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+
         // Publishing the configuration file.
         $this->publishes([
             __DIR__ . '/config/LaravelClient.php' => config_path('LaravelClient.php'),
@@ -59,7 +62,7 @@ class LaravelClientServiceProvider extends ServiceProvider
         // Publishing the views.
         $this->publishes([
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/sepehrgostar'),
-        ], 'LaravelClient.views');
+        ], 'sepehrgostar.LaravelClient.views');
 
         // Publishing assets.
         $this->publishes([
