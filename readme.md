@@ -16,7 +16,7 @@ php artisan vendor:publish --tag=sepehrgostar.ticketingClient.views
 
 migrate 
 ```
-php artisan vendor:publish --tag=sepehrgostar.ticketingClient.views
+php artisan vendor:publish --tag=sepehrgostar.ticketingClient
 ```
 
 ## Security
