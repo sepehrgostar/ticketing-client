@@ -69,9 +69,6 @@ class LaravelClientServiceProvider extends ServiceProvider
             __DIR__ . '/resources/assets' => public_path('vendor/sepehrgostar'),
         ], 'sepehrgostar.LaravelClient.views');
 
-        $this->publishes([
-            __DIR__ . '/resources/images' => public_path('images/icons'),
-        ], 'sepehrgostar.LaravelClient.views');
 
         // Publishing the translation files.
         /*$this->publishes([
