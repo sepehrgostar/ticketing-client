@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Sepehrgostar\\LaravelClient\\": "src/"
+            "Sepehrgostar\\TicketingClient\\": "src/"
         }
     },
     "extra": {
