@@ -4,7 +4,7 @@ namespace Sepehrgostar\TicketingClient\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use \Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -27,7 +27,7 @@ class ticketController extends Controller
 
         $data = (json_decode($response->getBody()->getContents(), false));
         if (@$data->type == "error") {
-            return redirect()->back()->withErrors( $data->message);
+            return redirect()->back()->withErrors($data->message);
         }
         return view('TicketingClient::ticket.index', compact('data'));
     }
@@ -48,8 +48,8 @@ class ticketController extends Controller
 
         $data = (json_decode($response->getBody()->getContents(), false));
 
-       if (@$data->type == "error") {
-            return redirect()->back()->withErrors( $data->message);
+        if (@$data->type == "error") {
+            return redirect()->back()->withErrors($data->message);
         }
         return view('TicketingClient::ticket.create', ['priorities' => $data->priorities, 'teams' => $data->teams, 'contracts' => json_encode($data->contracts)]);
     }
@@ -83,8 +83,8 @@ class ticketController extends Controller
         ]);
 
         $data = (json_decode($response->getBody()->getContents(), false));
-       if (@$data->type == "error") {
-            return redirect()->back()->withErrors( $data->message);
+        if (@$data->type == "error") {
+            return redirect()->back()->withErrors($data->message);
         }
 
 
@@ -105,8 +105,8 @@ class ticketController extends Controller
         ]);
 
         $data = (json_decode($response->getBody()->getContents(), false));
-       if (@$data->type == "error") {
-            return redirect()->back()->withErrors( $data->message);
+        if (@$data->type == "error") {
+            return redirect()->back()->withErrors($data->message);
         }
         return view('TicketingClient::ticket.show', ['data' => $data]);
     }
@@ -155,8 +155,8 @@ class ticketController extends Controller
 
         $data = (json_decode($response->getBody()->getContents(), false));
 
-       if (@$data->type == "error") {
-            return redirect()->back()->withErrors( $data->message);
+        if (@$data->type == "error") {
+            return redirect()->back()->withErrors($data->message);
         }
 
         return redirect()->back()->with($data->type, $data->content);
@@ -213,7 +213,13 @@ class ticketController extends Controller
             $base_url = config('TicketingClient.base_url');
             $response = Http::get($base_url . '/api/v1/register/user', [
                 'api_key' => config('TicketingClient.api_key'),
-                'user' => json_encode(auth()->user()),
+                'user' => [
+                    'name' => auth()->user()[config('TicketingClient.user.name', 'name')],
+                    'lname' => auth()->user()[config('TicketingClient.user.lastname', 'lname')],
+                    'mobile' => auth()->user()[config('TicketingClient.user.mobile', 'mobile')],
+                    'email' => auth()->user()[config('TicketingClient.user.email', 'email')],
+                    'username' => auth()->user()[config('TicketingClient.user.username', 'username')],
+                ],
             ]);
 
             $data = (json_decode($response->getBody()->getContents(), false));
