@@ -9,7 +9,7 @@ class main extends Controller
 
     public function index()
     {
-        return view('LaravelClient::index');
+        return view('LaravelClient::main');
     }
 
     public function query()

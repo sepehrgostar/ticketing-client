@@ -9,10 +9,10 @@
             <div class="card-header">تیکتها</div>
             <div class="card-body">
 
-                <p><a href="{{ route('ticket.create',['uid_tmp'=> Str::random(8)]) }}"
+                <p><a href="{{ route('sepehrgostar.LaravelClient.ticket.create',['uid_tmp'=> Str::random(8)]) }}"
                       class="btn btn-success text-light">ایجاد تیکت</a>
-                    <a href="{{route('show.setting')}}"
-                       class="btn btn-light ">تنظیمات اطلاع رسانی</a>
+{{--                    <a href="{{route('show.setting')}}"--}}
+{{--                       class="btn btn-light ">تنظیمات اطلاع رسانی</a>--}}
                 </p>
 
                 <div class="table-responsive">
@@ -32,7 +32,6 @@
 
                         @if(isset($data))
                             @forelse($data as $row)
-                                {{--                            @dd--}}
                                 <tr @if(@$row->is_open == 0) class="table-warning" @endif>
                                     <td>
 
@@ -57,7 +56,7 @@
                                     <td>
                                         <div class='btn-group float-left'>
                                             <a class='btn btn-primary btn-sm text-white'
-                                               href='{{route('ticket.show',['ticket_id'=>$row->id,'uid_tmp'=> Str::random(8)])}}'>مشاهده
+                                               href='{{route('sepehrgostar.LaravelClient.ticket.show',['ticket_id'=>$row->id,'uid_tmp'=> Str::random(8)])}}'>مشاهده
                                                 تیکت</a>
 
                                         </div>

@@ -1,6 +1,9 @@
 @extends('layouts.app' )
 @section('content')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
     <div class="container my-3">
         <div class="card shadow">
@@ -8,7 +11,7 @@
             <div class="card-body">
 
                 <form enctype="multipart/form-data" method='post'
-                      action="{{ route('ticket.store') }}"
+                      action="{{ route('sepehrgostar.LaravelClient.ticket.store') }}"
                 >
                     @csrf
 
@@ -82,27 +85,28 @@
                             <b> {{$signature->start_note ?? ''}}</b>
                         </p>
 
-                        <textarea class="form-control" rows="4" id="content"
+                        <textarea required class="form-control" rows="4" id="content"
                                   name="content">{{old("content")}}</textarea>
 
                         <p class="mt-3">
                             <b> {{$signature->end_note ?? ''}}</b>
                         </p>
 
-                        @component('ticketapiclient::partials.uploader', [
-                            'title' => trans('ticketing::admin.max_attach_files'),
-                            'params' => [
-                                'user'=> json_encode(auth()->user()),
-                                'api_key' => config('ticketapiclient.api_key'),
-                                'uid_tmp' => request()->uid_tmp,
-                                'attachable_type' => 'webine\ticketing\entities\ticketChildModel',
-                                'directory' => 'ticketing/'.date('Ym'),
-                                'is_private' => 1,
-                                'disk' => 'local',
-                            ],
-                            'maxFile' => 5,
-                            'acceptedFiles' => '.pdf,.jpg,.png,.jpeg,.zip,.rar,.pdf,.docx,.txt,.ppt,.xlsx,.xls,.pptx,.ppt,.doc',
-                            ])
+                        @component('LaravelClient::partials.uploader', [
+                        'title' => trans('ticketing::admin.max_attach_files'),
+                         'params' => [
+                         'user'=> json_encode(auth()->user()),
+                         'api_token'=> auth()->user()->sepehrgostar_api_token,
+                         'api_key' => config('LaravelClient.api_key'),
+                         'uid_tmp' => request()->uid_tmp,
+                         'attachable_type' => 'webine\ticketing\entities\ticketChildModel',
+                         'directory' => 'ticketing/'.date('Ym'),
+                         'is_private' => 1,
+                        'disk' => 'local',
+                        ],
+                        'maxFile' => 5,
+                        'acceptedFiles' => '.pdf,.jpg,.png,.jpeg,.zip,.rar,.pdf,.docx,.txt,.ppt,.xlsx,.xls,.pptx,.ppt,.doc',
+                          ])
                         @endcomponent
                     </div>
 

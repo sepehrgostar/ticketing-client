@@ -3,7 +3,9 @@
 namespace Sepehrgostar\LaravelClient\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use \Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
@@ -15,11 +17,11 @@ class ticketController extends Controller
         //register user in yourDomain.sepehrgostar.com
         $this->checkUser();
 
-        $base_url = config('ticketapiclient.base_url');
+        $base_url = config('LaravelClient.base_url');
         $response = Http::get($base_url . '/api/v1/index', [
-            'api_key' => config('ticketapiclient.api_key'),
+            'api_key' => config('LaravelClient.api_key'),
             'user' => json_encode(auth()->user()),
-            'api_token' => auth()->user()->api_token
+            'api_token' => auth()->user()->sepehrgostar_api_token
         ]);
 
         $data = (json_decode($response->getBody()->getContents(), false));
@@ -34,12 +36,12 @@ class ticketController extends Controller
         //register user in yourDomain.sepehrgostar.com
         $this->checkUser();
 
-        $base_url = config('ticketapiclient.base_url');
+        $base_url = config('LaravelClient.base_url');
 
         $response = Http::get($base_url . '/api/v1/create', [
-            'api_key' => config('ticketapiclient.api_key'),
+            'api_key' => config('LaravelClient.api_key'),
             'user' => json_encode(auth()->user()),
-            'api_token' => auth()->user()->api_token
+            'api_token' => auth()->user()->sepehrgostar_api_token
 
         ]);
 
@@ -48,17 +50,28 @@ class ticketController extends Controller
         if (isset($data->status) and ($data->status == "no_connect")) {
             return redirect()->route('home')->with('error', $data->message);
         }
-
         return view('LaravelClient::ticket.create', ['priorities' => $data->priorities, 'teams' => $data->teams, 'contracts' => json_encode($data->contracts)]);
     }
 
     public function store(Request $request)
     {
+        $request->validate([
+            "title" => 'required',
+            "priority" => 'required',
+            "team_uid" => 'required',
+            "content" => 'required',
+        ], [
+            "title.required" => 'عنوان الزامی می باشد.',
+            "priority.required" => 'درجه اهمیت الزامی می باشد.',
+            "team_uid.required" => 'تیم الزامی می باشد.',
+            "content.required" => 'متن تیکت الزامی می باشد.',
+        ]);
+
         $this->checkUser();
-        $base_url = config('ticketapiclient.base_url');
+        $base_url = config('LaravelClient.base_url');
         $response = Http::get($base_url . '/api/v1/store', [
-            'api_key' => config('ticketapiclient.api_key'),
-            'api_token' => auth()->user()->api_token,
+            'api_key' => config('LaravelClient.api_key'),
+            'api_token' => auth()->user()->sepehrgostar_api_token,
             "uid_tmp" => $request->uid_tmp,
             "title" => $request->title,
             "contract" => $request->contract,
@@ -73,19 +86,20 @@ class ticketController extends Controller
             return redirect()->route('home')->with('error', $data->message);
         }
 
-        return redirect()->route('ticket.show', ['ticket_id' => $data, 'uid_tmp' => Str::random(8)]);
-    }
 
+
+        return redirect()->route('sepehrgostar.LaravelClient.ticket.show', ['ticket_id' => $data, 'uid_tmp' => Str::random(8)]);
+    }
 
     public function show(Request $request, $id)
     {
         $this->checkUser();
 
-        $base_url = config('ticketapiclient.base_url');
+        $base_url = config('LaravelClient.base_url');
         $response = Http::get($base_url . '/api/v1/show/' . $id, [
-            'api_key' => config('ticketapiclient.api_key'),
+            'api_key' => config('LaravelClient.api_key'),
             'user' => json_encode(auth()->user()),
-            'api_token' => auth()->user()->api_token,
+            'api_token' => auth()->user()->sepehrgostar_api_token,
             'id' => $id,
             'request' => $request
         ]);
@@ -94,19 +108,25 @@ class ticketController extends Controller
         if (isset($data->status) and ($data->status == "no_connect")) {
             return redirect()->route('home')->with('error', $data->message);
         }
-        return view('ticketapiclient::show', ['data' => $data]);
+        return view('LaravelClient::ticket.show', ['data' => $data]);
     }
 
     public function reply(Request $request, $id)
     {
+
+        $request->validate([
+            "content" => 'required',
+        ],[
+            "content.required" => 'متن تیکت الزامی می باشد.',
+        ]);
+
         $this->checkUser();
 
-        $base_url = config('ticketapiclient.base_url');
+        $base_url = config('LaravelClient.base_url');
         $response = Http::get($base_url . '/api/v1/reply/' . $id, [
-            'api_key' => config('ticketapiclient.api_key'),
-            'api_token' => auth()->user()->api_token,
+            'api_key' => config('LaravelClient.api_key'),
+            'api_token' => auth()->user()->sepehrgostar_api_token,
             "uid_tmp" => $request->uid_tmp,
-            'rate' => $request->rate,
             'id' => $id,
             'parent_id' => $request->parent_id,
             "content" => $request['content'],
@@ -120,8 +140,65 @@ class ticketController extends Controller
         return redirect()->back()->with($data->type, $data->content);
     }
 
-    public function query()
+    public function downloadAttach(Request $request)
     {
+        $this->checkUser();
+
+        $base_url = config('LaravelClient.base_url');
+        $response = Http::get($base_url . '/api/v1/download/attach/' . $request->uuid, [
+            'api_key' => config('LaravelClient.api_key'),
+            'api_token' => auth()->user()->sepehrgostar_api_token,
+            'user' => json_encode(auth()->user()),
+        ]);
+
+        $file = (new Response($response, 200))
+            ->header('Content-Type', $request->mime)
+            ->header('Content-disposition', 'attachment; filename="' . $request->filename . '"');  //for download
+        return $file;
+    }
+
+    public function uploadedFiles(Request $request)
+    {
+        $this->checkUser();
+        $base_url = config('LaravelClient.base_url');
+        $response = Http::get($base_url . '/api/v1/uploaded/file', [
+            'api_key' => config('LaravelClient.api_key'),
+            'api_token' => auth()->user()->sepehrgostar_api_token,
+            'user' => json_encode(auth()->user()),
+            'attachable_type' => $request->attachable_type,
+            'uid_tmp' => $request->uid_tmp,
+        ]);
+
+        return (json_decode($response->getBody()->getContents(), false));
+    }
+
+    public function deleteAttach($id)
+    {
+        $base_url = config('LaravelClient.base_url');
+        Http::delete($base_url . '/api/v1/attachments/delete/' . $id, [
+            'api_key' => config('LaravelClient.api_key'),
+            'api_token' => auth()->user()->attachable_type,
+            'user' => json_encode(auth()->user()),
+        ]);
+    }
+
+    public function checkUser()
+    {
+        if (auth()->user()->sepehrgostar_api_token == null) {
+            $base_url = config('LaravelClient.base_url');
+
+            $response = Http::get($base_url . '/api/v1/register/user', [
+                'api_key' => config('LaravelClient.api_key'),
+                'user' => json_encode(auth()->user()),
+            ]);
+
+            $data = (json_decode($response->getBody()->getContents(), false));
+
+            User::find(auth()->id())->update([
+                'sepehrgostar_api_token' => $data->api_token
+            ]);
+        }
 
     }
+
 }
