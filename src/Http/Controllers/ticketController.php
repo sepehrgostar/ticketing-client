@@ -26,8 +26,8 @@ class ticketController extends Controller
         ]);
 
         $data = (json_decode($response->getBody()->getContents(), false));
-        if (isset($data->status) and ($data->status == "no_connect")) {
-            return redirect()->route('home')->with('error', $data->message);
+        if (@$data->type == "error") {
+            return redirect()->back()->withErrors( $data->message);
         }
         return view('TicketingClient::ticket.index', compact('data'));
     }
@@ -48,8 +48,8 @@ class ticketController extends Controller
 
         $data = (json_decode($response->getBody()->getContents(), false));
 
-        if (isset($data->status) and ($data->status == "no_connect")) {
-            return redirect()->route('home')->with('error', $data->message);
+       if (@$data->type == "error") {
+            return redirect()->back()->withErrors( $data->message);
         }
         return view('TicketingClient::ticket.create', ['priorities' => $data->priorities, 'teams' => $data->teams, 'contracts' => json_encode($data->contracts)]);
     }
@@ -83,12 +83,12 @@ class ticketController extends Controller
         ]);
 
         $data = (json_decode($response->getBody()->getContents(), false));
-        if (isset($data->status) and ($data->status == "no_connect")) {
-            return redirect()->route('home')->with('error', $data->message);
+       if (@$data->type == "error") {
+            return redirect()->back()->withErrors( $data->message);
         }
 
 
-        return redirect()->route('sepehrgostar.ticketing.ticket.show', ['ticket_id' => $data, 'uid_tmp' => Str::random(8)]);
+        return redirect()->route('Sepehrgostar.TicketingClient.show', ['ticket_id' => $data, 'uid_tmp' => Str::random(8)]);
     }
 
     public function show(Request $request, $id)
@@ -105,8 +105,8 @@ class ticketController extends Controller
         ]);
 
         $data = (json_decode($response->getBody()->getContents(), false));
-        if (isset($data->status) and ($data->status == "no_connect")) {
-            return redirect()->route('home')->with('error', $data->message);
+       if (@$data->type == "error") {
+            return redirect()->back()->withErrors( $data->message);
         }
         return view('TicketingClient::ticket.show', ['data' => $data]);
     }
@@ -134,7 +134,7 @@ class ticketController extends Controller
         ]);
         $data = (json_decode($response->getBody()->getContents(), false));
         if (isset($data->status) and ($data->status == "no_connect")) {
-            return redirect()->route('home')->with('error', $data->message);
+            return redirect()->back()->with('errors', $data->message);
         }
 
         return redirect()->back()->with($data->type, $data->content);
@@ -155,8 +155,8 @@ class ticketController extends Controller
 
         $data = (json_decode($response->getBody()->getContents(), false));
 
-        if (isset($data->status) and ($data->status == "no_connect")) {
-            return redirect()->route('home')->with('error', $data->message);
+       if (@$data->type == "error") {
+            return redirect()->back()->withErrors( $data->message);
         }
 
         return redirect()->back()->with($data->type, $data->content);
