@@ -139,29 +139,6 @@ class ticketController extends Controller
         return redirect()->back()->with($data->type, $data->content);
     }
 
-    public function createSensitive($ticket_id)
-    {
-        $this->checkUser();
-
-        $base_url = config('LaravelClient.base_url');
-        $response = Http::get($base_url . '/api/v1/create/sensitive', [
-            'api_key' => config('LaravelClient.api_key'),
-            'ticket_id' => $ticket_id,
-            'api_token' => auth()->user()->sepehrgostar_api_token,
-            'user' => json_encode(auth()->user()),
-
-        ]);
-
-        $sensitive = (json_decode($response->getBody()->getContents(), false));
-
-        dd($response, $sensitive);
-        if (isset($sensitive->status) and ($sensitive->status == "no_connect")) {
-            return redirect()->route('home')->with('error', $sensitive->message);
-        }
-
-        return view('LaravelClient::ticket.send_sensitive_data', compact('sensitive'));
-    }
-
     public function storeSensitive(Request $request)
     {
         $this->checkUser();
