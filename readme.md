@@ -1,4 +1,4 @@
-# laravel Sepehrgostar.com Ticketing  package
+# Sepehrgostar Ticketing System for laravel package
 
 
 ## Installation
