@@ -1,13 +1,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/themes/bars-1to10.min.css"/>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
 
-<link href="/css/dropzone.min.css" rel="stylesheet">
-<script src="/js/dropzone.min.js"></script>
+<link href="{{asset('vendor/sepehrgostar/dropzone.min.css')}}" rel="stylesheet">
+<script src="{{asset('vendor/sepehrgostar/dropzone.min.js')}}"></script>
 
 <div class="container my-3">
     @if(session()->has('success'))

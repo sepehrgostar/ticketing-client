@@ -11,8 +11,6 @@
 
                 <p><a href="{{ route('sepehrgostar.LaravelClient.ticket.create',['uid_tmp'=> Str::random(8)]) }}"
                       class="btn btn-success text-light">ایجاد تیکت</a>
-{{--                    <a href="{{route('show.setting')}}"--}}
-{{--                       class="btn btn-light ">تنظیمات اطلاع رسانی</a>--}}
                 </p>
 
                 <div class="table-responsive">

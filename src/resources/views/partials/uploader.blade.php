@@ -98,7 +98,7 @@
 
                     // Download link
                     var anchorEl = document.createElement('a');
-                    anchorEl.setAttribute('href', '/download/attach/' + uploadedFile.uuid);
+                    anchorEl.setAttribute('href', '{{config('LaravelClient.base_url')}}/api/v1/download/attach/' + uploadedFile.uuid);
                     anchorEl.setAttribute('target', '_blank');
                     anchorEl.className = 'dz-remove';
                     anchorEl.innerHTML = "دانلود فایل";
@@ -198,7 +198,7 @@
             ext = 'picture'
         }
 
-        return "/images/icon/" + ext + ".svg";
+        return "/vendor/sepehrgostar/images/icon/" + ext + ".svg";
 
     }
 </script>
