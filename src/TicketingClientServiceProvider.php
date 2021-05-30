@@ -63,7 +63,7 @@ class TicketingClientServiceProvider extends ServiceProvider
 
         // Publishing the views.
         $this->publishes([
-            __DIR__ . '/resources/views' => resource_path('views/vendor/ticketing')
+            __DIR__ . '/resources/views' => resource_path('views/vendor/TicketingClient')
         ], 'sepehrgostar.ticketingClient.views');
 
 
