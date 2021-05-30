@@ -87,7 +87,6 @@ class ticketController extends Controller
         }
 
 
-
         return redirect()->route('sepehrgostar.LaravelClient.ticket.show', ['ticket_id' => $data, 'uid_tmp' => Str::random(8)]);
     }
 
@@ -116,7 +115,7 @@ class ticketController extends Controller
 
         $request->validate([
             "content" => 'required',
-        ],[
+        ], [
             "content.required" => 'متن تیکت الزامی می باشد.',
         ]);
 
@@ -138,6 +137,52 @@ class ticketController extends Controller
         }
 
         return redirect()->back()->with($data->type, $data->content);
+    }
+
+    public function createSensitive($ticket_id)
+    {
+        $this->checkUser();
+
+        $base_url = config('LaravelClient.base_url');
+        $response = Http::get($base_url . '/api/v1/create/sensitive', [
+            'api_key' => config('LaravelClient.api_key'),
+            'ticket_id' => $ticket_id,
+            'api_token' => auth()->user()->sepehrgostar_api_token,
+            'user' => json_encode(auth()->user()),
+
+        ]);
+
+        $sensitive = (json_decode($response->getBody()->getContents(), false));
+
+        dd($response, $sensitive);
+        if (isset($sensitive->status) and ($sensitive->status == "no_connect")) {
+            return redirect()->route('home')->with('error', $sensitive->message);
+        }
+
+        return view('LaravelClient::ticket.send_sensitive_data', compact('sensitive'));
+    }
+
+    public function storeSensitive(Request $request)
+    {
+        $this->checkUser();
+
+        $base_url = config('LaravelClient.base_url');
+        $response = Http::get($base_url . '/api/v1/store/sensitive', [
+            'api_key' => config('LaravelClient.api_key'),
+            'ticket_id' => $request->ticket_id,
+            'content' => $request->content,
+            'api_token' => auth()->user()->sepehrgostar_api_token,
+            'user' => json_encode(auth()->user()),
+        ]);
+
+        $data = (json_decode($response->getBody()->getContents(), false));
+
+        if (isset($data->status) and ($data->status == "no_connect")) {
+            return redirect()->route('home')->with('error', $data->message);
+        }
+
+        return redirect()->back()->with($data->type, $data->content);
+
     }
 
     public function downloadAttach(Request $request)

@@ -1,9 +1,9 @@
 @extends('layouts.app' )
 @section('content')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <link rel="stylesheet" href="{{asset('vendor/sepehrgostar/bootstrap.min.css')}}">
+    <script src="{{asset('vendor/sepehrgostar/alpine.js')}}" defer></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="{{asset('vendor/sepehrgostar/jquery.min.js')}}"></script>
 
     <div class="container my-3">
         <div class="card shadow">

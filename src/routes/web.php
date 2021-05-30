@@ -15,6 +15,9 @@ Route::group(['middleware' => ['web', 'auth'], 'as' => 'sepehrgostar.LaravelClie
         Route::get('download/attach','ticketController@downloadAttach')->name('download.attach');
         Route::get('uploaded/files','ticketController@uploadedFiles')->name('uploaded.files');
         Route::delete('delete/file/{id}','ticketController@deleteAttach')->name('delete.files');
+
+        Route::post('sensitive','ticketController@storeSensitive')->name('sensitive');
+
     });
 
 });

@@ -4,14 +4,12 @@
             <div class="p-1">
                 <small class="badge @if(@$row->user->is_admin) badge-primary @else badge-secondary  @endif ">
 
-                    @if(auth()->user()->is_admin ==1 )
-                        <span class="tahoma"> {{@$row->user->username }}</span>
-                    @elseif(auth()->user()->is_admin ==0
-{{-- and setting('ticketing_show_operator_username') == 1--}}
- )
+
+                    <span class="tahoma"> {{auth()->user()['username'] ?? '---'}}</span>
+                    @if(auth()->user()->id !=$row->user->id)
+                        <span class="tahoma"> operator </span>
+                    @else
                         <span class="tahoma"> {{auth()->user()['username'] ?? '---'}}</span>
-                    @elseif(auth()->user()->id !=$row->user->id)
-                        @lang('ticketing::profile.operator')
                     @endif
 
                 </small>
@@ -41,37 +39,6 @@
             <div class="col ">
 
                 <hr class="m-0">
-
-                <style>
-
-                    .br-theme-bars-1to10 .br-widget .br-current-rating {
-                        font-size: 15px;
-                    }
-
-                    .br-theme-bars-1to10 .br-widget a {
-                        display: block;
-                        width: 5px;
-                        padding: 5px 0;
-                        height: 5px;
-                        float: left;
-                        background-color: #fbedd9;
-                        margin: 1px;
-                        text-align: center;
-                    }
-
-                    .br-theme-bars-1to10 .br-widget {
-                        height: 0px;
-                    }
-
-                    .br-theme-bars-1to10 .br-widget .br-current-rating {
-                        font-size: 15px;
-                        line-height: 1;
-                        float: left;
-                        padding: 0 5px 0 2px;
-                        color: #edb867;
-                        font-weight: 400;
-                    }
-                </style>
 
                 <div class=" mb-3">
                     @if(!empty($row->parent_id))

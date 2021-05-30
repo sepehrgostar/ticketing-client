@@ -1,8 +1,8 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="{{asset('vendor/sepehrgostar/bootstrap.min.css')}}">
+<script src="{{asset('vendor/sepehrgostar/alpine.js')}}" defer></script>
+<script src="{{asset('vendor/sepehrgostar/jquery.min.js')}}"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+<script src="{{asset('vendor/sepehrgostar/bootstrap.min.js')}}"></script>
 
 <link href="{{asset('vendor/sepehrgostar/dropzone.min.css')}}" rel="stylesheet">
 <script src="{{asset('vendor/sepehrgostar/dropzone.min.js')}}"></script>
@@ -130,11 +130,10 @@
 
                 <div class="btn-group float-left" role="group" aria-label="Basic example">
                     <button type="button"
-                            class="btn btn-dark" data-toggle="modal"
-                            data-target="#createSensitiveModal">
+                            class="btn btn-dark" data-bs-toggle="modal"
+                            data-bs-target="#createSensitiveModal">
                         دیتا محرمانه
                     </button>
-
 
                     <a class='btn btn-secondary'
                        href='{{route('sepehrgostar.LaravelClient.ticket.index')}}'>
@@ -147,6 +146,7 @@
         </div>
 
     </form>
+    @include('LaravelClient::ticket.send_sensitive_data')
 
 </div>
 
