@@ -4,8 +4,6 @@
 
 <script src="{{asset('vendor/sepehrgostar/bootstrap.min.js')}}"></script>
 
-<link href="{{asset('vendor/sepehrgostar/dropzone.min.css')}}" rel="stylesheet">
-<script src="{{asset('vendor/sepehrgostar/dropzone.min.js')}}"></script>
 
 <div class="container my-3">
     @if(session()->has('success'))
@@ -13,9 +11,9 @@
             {{ session()->get('success') }}
         </div>
     @endif
-        @if(Session::has('message'))
-            <p class="alert alert-info">{{ Session::get('message') }}</p>
-        @endif
+    @if(Session::has('message'))
+        <p class="alert alert-info">{{ Session::get('message') }}</p>
+    @endif
 
     <form id="reply" role="form" method="POST"
           action="{{route('Sepehrgostar.TicketingClient.reply',$data->ticket->id)}}"
@@ -101,10 +99,6 @@
                            'api_token'=> auth()->user()->sepehrgostar_api_token,
                            'api_key' => config('TicketingClient.api_key'),
                            'uid_tmp' => request()->uid_tmp,
-                           'attachable_type' => 'webine\ticketing\entities\ticketChildModel',
-                           'directory' => 'ticketing/'.date('Ym'),
-                           'is_private' => 1,
-                           'disk' => 'local',
                        ],
                        'maxFile' => 5,
                        'acceptedFiles' => '.pdf,.jpg,.png,.jpeg,.zip,.rar,.pdf,.docx,.txt,.ppt,.xlsx,.xls,.pptx,.ppt,.doc',

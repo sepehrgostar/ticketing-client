@@ -7,7 +7,7 @@ Route::group(['middleware' => ['web', 'auth'], 'as' => 'Sepehrgostar.TicketingCl
     Route::post('store', 'ticketController@store')->name('store');
     Route::get('show/{ticket_id}', 'ticketController@show')->name('show');
     Route::post('reply/{ticket_id}', 'ticketController@reply')->name('reply');
-    Route::post('store/attach', 'ticketController@apiAttach')->name('store.attach');
+
     Route::get('download/attach', 'ticketController@downloadAttach')->name('download.attach');
     Route::get('uploaded/files', 'ticketController@uploadedFiles')->name('uploaded.files');
     Route::delete('delete/file/{id}', 'ticketController@deleteAttach')->name('delete.files');
