@@ -32,7 +32,7 @@ class ticketController extends Controller
         ]);
 
         $data = (json_decode($response->getBody()->getContents(), false));
-        if (@$data->type == "error") {
+        if (@$data->type == "errors") {
             return redirect()->back()->withErrors($data->message);
         }
         return view('TicketingClient::ticket.index', compact('data'));
@@ -57,7 +57,7 @@ class ticketController extends Controller
 
         $data = (json_decode($response->getBody()->getContents(), false));
 
-        if (@$data->type == "error") {
+        if (@$data->type == "errors") {
             return redirect()->back()->withErrors($data->message);
         }
 
@@ -92,7 +92,7 @@ class ticketController extends Controller
         ]);
 
         $data = (json_decode($response->getBody()->getContents(), false));
-        if (@$data->type == "error") {
+        if (@$data->type == "errors") {
             return redirect()->back()->withErrors($data->message);
         }
 
@@ -117,7 +117,7 @@ class ticketController extends Controller
         ]);
 
         $data = (json_decode($response->getBody()->getContents(), false));
-        if (@$data->type == "error") {
+        if (@$data->type == "errors") {
             return redirect()->back()->withErrors($data->message);
         }
         return view('TicketingClient::ticket.show', ['data' => $data]);
@@ -164,7 +164,7 @@ class ticketController extends Controller
 
         $data = (json_decode($response->getBody()->getContents(), false));
 
-        if (@$data->type == "error") {
+        if (@$data->type == "errors") {
             return redirect()->back()->withErrors($data->message);
         }
 
