@@ -16,20 +16,10 @@ class ticketController extends Controller
     {
 
         //register user in yourDomain.sepehrgostar.com
+
         $this->checkUser();
 
-        $base_url = config('TicketingClient.base_url');
-        $response = Http::get($base_url . '/api/v1/index', [
-            'api_key' => config('TicketingClient.api_key'),
-            'api_token' => auth()->user()->sepehrgostar_api_token,
-            'user' => [
-                'name' => auth()->user()[config('TicketingClient.user.name', 'name')],
-                'lname' => auth()->user()[config('TicketingClient.user.username', 'lname')],
-                'mobile' => auth()->user()[config('TicketingClient.user.mobile', 'mobile')],
-                'email' => auth()->user()[config('TicketingClient.user.email', 'email')],
-                'username' => auth()->user()[config('TicketingClient.user.username', 'username')],
-            ],
-        ]);
+        $response = $this->post([], '/api/v1/index');
 
         $data = (json_decode($response->getBody()->getContents(), false));
         if (@$data->type == "errors") {
@@ -43,18 +33,8 @@ class ticketController extends Controller
         //register user in yourDomain.sepehrgostar.com
         $this->checkUser();
 
-        $response = Http::get(config('TicketingClient.base_url') . '/api/v1/create', [
-            'api_key' => config('TicketingClient.api_key'),
-            'api_token' => auth()->user()->sepehrgostar_api_token,
-            'user' => [
-                'name' => auth()->user()[config('TicketingClient.user.name', 'name')],
-                'lname' => auth()->user()[config('TicketingClient.user.username', 'lname')],
-                'mobile' => auth()->user()[config('TicketingClient.user.mobile', 'mobile')],
-                'email' => auth()->user()[config('TicketingClient.user.email', 'email')],
-                'username' => auth()->user()[config('TicketingClient.user.username', 'username')],
-            ],
-        ]);
-
+        $response = $this->post([], '/api/v1/create');
+ 
         $data = (json_decode($response->getBody()->getContents(), false));
 
         if (@$data->type == "errors") {
@@ -79,17 +59,15 @@ class ticketController extends Controller
         ]);
 
 
-        $base_url = config('TicketingClient.base_url');
-        $response = Http::get($base_url . '/api/v1/store', [
-            'api_key' => config('TicketingClient.api_key'),
-            'api_token' => auth()->user()->sepehrgostar_api_token,
+        $response = $this->post([
             "uid_tmp" => $request->uid_tmp,
             "title" => $request->title,
             "contract" => $request->contract,
             "priority" => $request->priority,
             "team_uid" => $request->team_uid,
             "content" => $request['content'],
-        ]);
+        ], '/api/v1/store');
+
 
         $data = (json_decode($response->getBody()->getContents(), false));
         if (@$data->type == "errors") {
@@ -101,20 +79,12 @@ class ticketController extends Controller
 
     public function show(Request $request, $id)
     {
-        $base_url = config('TicketingClient.base_url');
-        $response = Http::get($base_url . '/api/v1/show/' . $id, [
-            'api_key' => config('TicketingClient.api_key'),
-            'api_token' => auth()->user()->sepehrgostar_api_token,
+
+        $response = $this->post([
             'id' => $id,
             'request' => $request,
-            'user' => [
-                'name' => auth()->user()[config('TicketingClient.user.name', 'name')],
-                'lname' => auth()->user()[config('TicketingClient.user.username', 'lname')],
-                'mobile' => auth()->user()[config('TicketingClient.user.mobile', 'mobile')],
-                'email' => auth()->user()[config('TicketingClient.user.email', 'email')],
-                'username' => auth()->user()[config('TicketingClient.user.username', 'username')],
-            ],
-        ]);
+        ], '/api/v1/show' . $id);
+
 
         $data = (json_decode($response->getBody()->getContents(), false));
         if (@$data->type == "errors") {
@@ -133,14 +103,12 @@ class ticketController extends Controller
             "content.required" => 'متن تیکت الزامی می باشد.',
         ]);
 
-        $response = Http::get(config('TicketingClient.base_url') . '/api/v1/reply/' . $id, [
-            'api_key' => config('TicketingClient.api_key'),
-            'api_token' => auth()->user()->sepehrgostar_api_token,
+        $response = $this->post([
             "uid_tmp" => $request->uid_tmp,
             'id' => $id,
             'parent_id' => $request->parent_id,
             "content" => $request['content'],
-        ]);
+        ], '/api/v1/reply' . $id);
 
         $data = (json_decode($response->getBody()->getContents(), false));
 
@@ -154,13 +122,10 @@ class ticketController extends Controller
     public function storeSensitive(Request $request)
     {
 
-        $base_url = config('TicketingClient.base_url');
-        $response = Http::get($base_url . '/api/v1/store/sensitive', [
-            'api_key' => config('TicketingClient.api_key'),
+        $response = $this->post([
             'ticket_id' => $request->ticket_id,
             'content' => $request->content,
-            'api_token' => auth()->user()->sepehrgostar_api_token,
-        ]);
+        ], '/api/v1/store/sensitive');
 
         $data = (json_decode($response->getBody()->getContents(), false));
 
@@ -175,11 +140,8 @@ class ticketController extends Controller
 
     public function downloadAttach(Request $request)
     {
-        $base_url = config('TicketingClient.base_url');
-        $response = Http::get($base_url . '/api/v1/download/attach/' . $request->uuid, [
-            'api_key' => config('TicketingClient.api_key'),
-            'api_token' => auth()->user()->sepehrgostar_api_token,
-        ]);
+
+        $response = $this->post([], '/api/v1/download/attach/' . $request->uuid);
 
         $file = (new Response($response, 200))
             ->header('Content-Type', $request->mime)
@@ -189,24 +151,39 @@ class ticketController extends Controller
 
     public function uploadedFiles(Request $request)
     {
-        $base_url = config('TicketingClient.base_url');
-        $response = Http::get($base_url . '/api/v1/uploaded/file', [
-            'api_key' => config('TicketingClient.api_key'),
-            'api_token' => auth()->user()->sepehrgostar_api_token,
+
+        $response = $this->post([
             'attachable_type' => $request->attachable_type,
-            'uid_tmp' => $request->uid_tmp,
-        ]);
+            'uid_tmp' => $request->uid_tmp
+        ], '/api/v1/uploaded/file');
 
         return (json_decode($response->getBody()->getContents(), false));
     }
 
     public function deleteAttach($id)
     {
-        $base_url = config('TicketingClient.base_url');
-        Http::delete($base_url . '/api/v1/attachments/delete/' . $id, [
+
+        $response = $this->post([
+            'attachable_type' => $request->attachable_type,
+            'uid_tmp' => $request->uid_tmp
+        ], '/api/v1/attachments/delete/' . $id);
+    }
+
+
+    public function post($data, $url)
+    {
+        return Http::post(config('TicketingClient.base_url') . $url, array_merge($data, [
             'api_key' => config('TicketingClient.api_key'),
             'api_token' => auth()->user()->sepehrgostar_api_token,
-        ]);
+            'user' => [
+                'name' => auth()->user()[config('TicketingClient.user.name', 'name')],
+                'lname' => auth()->user()[config('TicketingClient.user.username', 'lname')],
+                'mobile' => auth()->user()[config('TicketingClient.user.mobile', 'mobile')],
+                'email' => auth()->user()[config('TicketingClient.user.email', 'email')],
+                'username' => auth()->user()[config('TicketingClient.user.username', 'username')],
+            ],
+        ]));
+
     }
 
     public function checkUser()
