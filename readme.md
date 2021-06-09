@@ -16,8 +16,9 @@ php artisan vendor:publish --tag=sepehrgostar.ticketingClient --force
 
 migrate 
 ```
-php artisan vendor:publish --tag=sepehrgostar.ticketingClient
+php artisan migrate 
 ```
+this command add column "sepehrgostar_api_token" to users table
 
 ## usage<br>
 add main route in your user dashboard
