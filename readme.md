@@ -19,8 +19,11 @@ migrate
 php artisan vendor:publish --tag=sepehrgostar.ticketingClient
 ```
 
-#usage
-1-s
+## usage<br>
+main route 
+```
+route('Sepehrgostar.TicketingClient.index')
+```
 <br>
 2=dsf
 
