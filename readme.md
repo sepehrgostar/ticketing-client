@@ -11,7 +11,7 @@ $ composer require sepehrgostar/ticketing-client
 
 publish view and assets
 ```
-php artisan vendor:publish --tag=sepehrgostar.ticketingClient.views
+php artisan vendor:publish --tag=sepehrgostar.ticketingClient --force
 ```
 
 migrate 
