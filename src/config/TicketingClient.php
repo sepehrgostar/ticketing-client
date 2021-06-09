@@ -2,5 +2,12 @@
 
 return [
     'base_url' => '',
-    'api_key' => ''
+    'api_key' => '',
+    'user' => [
+        'name' => 'name',
+        'lname' => 'lname',
+        'mobile' => 'mobile',
+        'email' => 'email',
+        'username' => 'username'
+    ]
 ];
