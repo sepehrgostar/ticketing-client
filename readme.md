@@ -21,6 +21,7 @@ php artisan vendor:publish --tag=sepehrgostar.ticketingClient
 
 #usage
 1-s
+<br>
 2=dsf
 
 ## Security
