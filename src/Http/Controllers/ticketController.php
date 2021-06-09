@@ -34,7 +34,7 @@ class ticketController extends Controller
         $this->checkUser();
 
         $response = $this->post([], '/api/v1/create');
- 
+
         $data = (json_decode($response->getBody()->getContents(), false));
 
         if (@$data->type == "errors") {
@@ -189,19 +189,10 @@ class ticketController extends Controller
     public function checkUser()
     {
 
+        //فقط یکبار اجرا میشود زمانی که  api_token نداشت
         if (auth()->user()->sepehrgostar_api_token == null) {
-            $base_url = config('TicketingClient.base_url');
-            $response = Http::get($base_url . '/api/v1/register/user', [
-                'api_key' => config('TicketingClient.api_key'),
-                'user' => [
-                    'name' => auth()->user()[config('TicketingClient.user.name', 'name')],
-                    'lname' => auth()->user()[config('TicketingClient.user.username', 'lname')],
-                    'mobile' => auth()->user()[config('TicketingClient.user.mobile', 'mobile')],
-                    'email' => auth()->user()[config('TicketingClient.user.email', 'email')],
-                    'username' => auth()->user()[config('TicketingClient.user.username', 'username')],
-                ],
-            ]);
 
+            $response = $this->post([], '/api/v1/register/user');
             $data = json_decode($response->getBody()->getContents(), false);
 
             User::find(auth()->id())->update([
