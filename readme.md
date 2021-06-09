@@ -18,7 +18,7 @@ migrate
 ```
 php artisan migrate 
 ```
-this command add column "sepehrgostar_api_token" to users table
+this command add column varchar 64 and nullabe "sepehrgostar_api_token" to users table
 
 ## usage<br>
 add main route in your user dashboard
