@@ -20,7 +20,7 @@ php artisan vendor:publish --tag=sepehrgostar.ticketingClient
 ```
 
 ## usage<br>
-main route 
+add main route in your user dashboard
 ```
 route('Sepehrgostar.TicketingClient.index')
 ```
